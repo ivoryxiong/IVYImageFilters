@@ -19,6 +19,13 @@
 		0A4DA20C1918B641005ED89E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A4DA1F41918B641005ED89E /* UIKit.framework */; };
 		0A4DA2141918B641005ED89E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0A4DA2121918B641005ED89E /* InfoPlist.strings */; };
 		0A4DA2161918B641005ED89E /* IVYImageFiltersTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4DA2151918B641005ED89E /* IVYImageFiltersTests.m */; };
+		0A4DA2211918B667005ED89E /* IVYViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4DA2201918B667005ED89E /* IVYViewController.m */; };
+		0A4DA2241918BC41005ED89E /* wp000.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A4DA2231918BC41005ED89E /* wp000.png */; };
+		0A4DA2281918DA90005ED89E /* IVYOldFilmFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4DA2271918DA90005ED89E /* IVYOldFilmFilter.m */; };
+		0A4DA22B1918DCAD005ED89E /* IVYAnonymousFacesFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4DA22A1918DCAD005ED89E /* IVYAnonymousFacesFilter.m */; };
+		0A4DA22D1918E5BB005ED89E /* wp001.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A4DA22C1918E5BB005ED89E /* wp001.png */; };
+		0A4DA2301919033A005ED89E /* IVYBaseFilterCompositing.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4DA22F1919033A005ED89E /* IVYBaseFilterCompositing.m */; };
+		0A4DA2331919042A005ED89E /* IVYAnonymousFacesCompositing.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4DA2321919042A005ED89E /* IVYAnonymousFacesCompositing.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +55,18 @@
 		0A4DA2111918B641005ED89E /* IVYImageFiltersTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IVYImageFiltersTests-Info.plist"; sourceTree = "<group>"; };
 		0A4DA2131918B641005ED89E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0A4DA2151918B641005ED89E /* IVYImageFiltersTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IVYImageFiltersTests.m; sourceTree = "<group>"; };
+		0A4DA21F1918B667005ED89E /* IVYViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVYViewController.h; sourceTree = "<group>"; };
+		0A4DA2201918B667005ED89E /* IVYViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVYViewController.m; sourceTree = "<group>"; };
+		0A4DA2231918BC41005ED89E /* wp000.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wp000.png; sourceTree = "<group>"; };
+		0A4DA2261918DA90005ED89E /* IVYOldFilmFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVYOldFilmFilter.h; sourceTree = "<group>"; };
+		0A4DA2271918DA90005ED89E /* IVYOldFilmFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVYOldFilmFilter.m; sourceTree = "<group>"; };
+		0A4DA2291918DCAD005ED89E /* IVYAnonymousFacesFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVYAnonymousFacesFilter.h; sourceTree = "<group>"; };
+		0A4DA22A1918DCAD005ED89E /* IVYAnonymousFacesFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVYAnonymousFacesFilter.m; sourceTree = "<group>"; };
+		0A4DA22C1918E5BB005ED89E /* wp001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wp001.png; sourceTree = "<group>"; };
+		0A4DA22E1919033A005ED89E /* IVYBaseFilterCompositing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVYBaseFilterCompositing.h; sourceTree = "<group>"; };
+		0A4DA22F1919033A005ED89E /* IVYBaseFilterCompositing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVYBaseFilterCompositing.m; sourceTree = "<group>"; };
+		0A4DA2311919042A005ED89E /* IVYAnonymousFacesCompositing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVYAnonymousFacesCompositing.h; sourceTree = "<group>"; };
+		0A4DA2321919042A005ED89E /* IVYAnonymousFacesCompositing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVYAnonymousFacesCompositing.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,9 +126,13 @@
 		0A4DA1F61918B641005ED89E /* IVYImageFilters */ = {
 			isa = PBXGroup;
 			children = (
+				0A4DA2251918BCA8005ED89E /* Filters */,
+				0A4DA2221918BC41005ED89E /* Images */,
+				0A4DA2021918B641005ED89E /* Images.xcassets */,
 				0A4DA1FF1918B641005ED89E /* IVYAppDelegate.h */,
 				0A4DA2001918B641005ED89E /* IVYAppDelegate.m */,
-				0A4DA2021918B641005ED89E /* Images.xcassets */,
+				0A4DA21F1918B667005ED89E /* IVYViewController.h */,
+				0A4DA2201918B667005ED89E /* IVYViewController.m */,
 				0A4DA1F71918B641005ED89E /* Supporting Files */,
 			);
 			path = IVYImageFilters;
@@ -142,6 +165,30 @@
 				0A4DA2121918B641005ED89E /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0A4DA2221918BC41005ED89E /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				0A4DA2231918BC41005ED89E /* wp000.png */,
+				0A4DA22C1918E5BB005ED89E /* wp001.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		0A4DA2251918BCA8005ED89E /* Filters */ = {
+			isa = PBXGroup;
+			children = (
+				0A4DA2261918DA90005ED89E /* IVYOldFilmFilter.h */,
+				0A4DA2271918DA90005ED89E /* IVYOldFilmFilter.m */,
+				0A4DA2291918DCAD005ED89E /* IVYAnonymousFacesFilter.h */,
+				0A4DA22A1918DCAD005ED89E /* IVYAnonymousFacesFilter.m */,
+				0A4DA22E1919033A005ED89E /* IVYBaseFilterCompositing.h */,
+				0A4DA22F1919033A005ED89E /* IVYBaseFilterCompositing.m */,
+				0A4DA2311919042A005ED89E /* IVYAnonymousFacesCompositing.h */,
+				0A4DA2321919042A005ED89E /* IVYAnonymousFacesCompositing.m */,
+			);
+			path = Filters;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,7 +267,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A4DA22D1918E5BB005ED89E /* wp001.png in Resources */,
 				0A4DA1FB1918B641005ED89E /* InfoPlist.strings in Resources */,
+				0A4DA2241918BC41005ED89E /* wp000.png in Resources */,
 				0A4DA2031918B641005ED89E /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -240,8 +289,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A4DA2331919042A005ED89E /* IVYAnonymousFacesCompositing.m in Sources */,
 				0A4DA1FD1918B641005ED89E /* main.m in Sources */,
 				0A4DA2011918B641005ED89E /* IVYAppDelegate.m in Sources */,
+				0A4DA2301919033A005ED89E /* IVYBaseFilterCompositing.m in Sources */,
+				0A4DA2281918DA90005ED89E /* IVYOldFilmFilter.m in Sources */,
+				0A4DA2211918B667005ED89E /* IVYViewController.m in Sources */,
+				0A4DA22B1918DCAD005ED89E /* IVYAnonymousFacesFilter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
