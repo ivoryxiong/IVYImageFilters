@@ -7,7 +7,10 @@
 //
 
 #import "IVYViewController.h"
-#import "IVYAnonymousFacesFilter.h"
+#import "IVYAnonymousFacesCompositing.h"
+#import "IVYVignetteFaceCompositing.h"
+#import "IVYOldFilmCompositing.h"
+
 #import <CoreImage/CoreImage.h>
 #import <CoreImage/CIFilter.h>
 
@@ -26,7 +29,7 @@
     [self.imageView setCenter:CGPointMake(self.view.bounds.size.width * 0.5, 64 + self.imageView.bounds.size.height * 0.5)];
     [self.view addSubview:self.imageView];
 
-    NSArray *filters = @[@"sepiaTone", @"gaussianBlur", @"anonymousFaces", @"sepiaTone", @"sepiaTone", @"sepiaTone"];
+    NSArray *filters = @[@"anonymousFaces", @"vignetteFace", @"anonymousFaces", @"anonymousFaces", @"anonymousFaces", @"sepiaTone"];
     NSInteger ord = 0;
     for (NSString *filter in filters) {
         UIButton *button = [self buttonWithTitle:filter];
@@ -55,39 +58,26 @@
 
 - (void)processImage:(UIButton *)sender {
     SEL sel = NSSelectorFromString([NSString stringWithFormat:@"%@:", sender.titleLabel.text]);
-    CIFilter *filter = (CIFilter*)[self performSelector:sel withObject:self.orgImg];
-
-    CIContext *context = [CIContext contextWithOptions:NULL];
-    CIImage *ciimage = [filter outputImage];
-    CGImageRef cgimg = [context createCGImage:ciimage fromRect:[ciimage extent]];
-    UIImage *uiimage = [UIImage imageWithCGImage:cgimg];
-    CGImageRelease(cgimg);
-
-    self.imageView.image = uiimage;
+    UIImage * processedImage = (UIImage*)[self performSelector:sel withObject:self.orgImg];
+    self.imageView.image = processedImage;
 }
 
-- (CIFilter *)sepiaTone:(UIImage *)orgImg {
-    NSLog(@"user filters : CISepiaTone");
-    CIFilter *filter = [CIFilter filterWithName:@"CISepiaTone"];
-    [filter setValue:[CIImage imageWithCGImage:self.orgImg.CGImage] forKey:@"inputImage"];
-    [filter setValue:@0.8 forKey:@"inputIntensity"];
-    return filter;
+- (UIImage *)sepiaTone:(UIImage *)orgImg {
+    NSLog(@"user filters : IVYOldFilmCompositing");
+    IVYBaseFilterCompositing  *compositing = [[IVYOldFilmCompositing alloc] init];
+    return [compositing filterImage:orgImg configs:nil];
 }
 
-- (CIFilter *)gaussianBlur:(UIImage *)orgImg {
-    NSLog(@"user filters : CIGaussianBlur");
-    CIFilter *filter = [CIFilter filterWithName:@"CIGaussianBlur"];
-    [filter setValue:[CIImage imageWithCGImage:self.orgImg.CGImage] forKey:@"inputImage"];
-    [filter setValue:@1 forKey:@"inputRadius"];
-    return filter;
-}
-
-- (CIFilter *)anonymousFaces:(UIImage *)orgImg {
+- (UIImage *)anonymousFaces:(UIImage *)orgImg {
     NSLog(@"user filters : IVYAnonymousFacesFilter");
-    CIFilter *filter = [CIFilter filterWithName:@"IVYAnonymousFacesFilter"];
-    [filter setValue:[CIImage imageWithCGImage:self.orgImg.CGImage] forKey:@"inputImage"];
-    return filter;
+    IVYBaseFilterCompositing  *compositing = [[IVYAnonymousFacesCompositing alloc] init];
+    return [compositing filterImage:orgImg configs:nil];
 }
 
+- (UIImage *)vignetteFace:(UIImage *)orgImg {
+    NSLog(@"user filters : IVYVignetteFaceCompositing");
+    IVYBaseFilterCompositing  *compositing = [[IVYVignetteFaceCompositing alloc] init];
+    return [compositing filterImage:orgImg configs:nil];
+}
 @end
 

@@ -1,13 +1,13 @@
 //
-//  IVYOldFilmFilter.m
+//  IVYOldFilmCompositing.h
 //  IVYImageFilters
 //
 //  Created by ivoryxiong on 14-5-6.
 //  Copyright (c) 2014年 IVORY. All rights reserved.
 //
 
-#import "IVYOldFilmFilter.h"
+#import "IVYBaseFilterCompositing.h"
 
-@implementation IVYOldFilmFilter
+@interface IVYOldFilmCompositing : IVYBaseFilterCompositing
 
 @end

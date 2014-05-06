@@ -22,20 +22,44 @@
     NSArray *features = [detector featuresInImage:ciImage options:nil];
     
     if ([features count]) {
-        CIFaceFeature *faceFeature = [features firstObject];
-        CGFloat centerX = faceFeature.bounds.origin.x+faceFeature.bounds.size.width / 2.0;
-        CGFloat centerY = faceFeature.bounds.origin.y+faceFeature.bounds.size.height / 2.0;
-        CGFloat radius = MIN(faceFeature.bounds.size.width,faceFeature.bounds.size.height) / 1.5;
-        CIFilter *radialGradient = [CIFilter filterWithName:@"CIRadialGradient"keysAndValues:
-                                    @"inputRadius0", @(self.orignalImage.size.width*2/3),
-                                    @"inputRadius1", @(radius + 10.0f),
-                                    @"inputColor0", [CIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0],
-                                    @"inputColor1", [CIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.0],
-                                    kCIInputCenterKey, [CIVector vectorWithX:centerX Y:centerY],nil];
-        CIFilter *compositing = [CIFilter filterWithName:@"CISourceOverCompositing" keysAndValues:
-                                 kCIInputImageKey,radialGradient.outputImage,
-                                 kCIInputBackgroundImageKey,ciImage,nil];
-        CGImageRef cgImage = [context createCGImage:compositing.outputImage fromRect:CGRectMake(0, 0, self.orignalImage.size.width, self.orignalImage.size.height)];
+        //mask images
+        CIImage *maskImage = nil;
+        for (CIFeature *f in features) {
+            CGFloat centerX = f.bounds.origin.x + f.bounds.size.width / 2.0;
+            CGFloat centerY = f.bounds.origin.y + f.bounds.size.height / 2.0;
+            CGFloat radius = MIN(f.bounds.size.width, f.bounds.size.height) / 1.5;
+            CIFilter *radialGradient = [CIFilter filterWithName:@"CIRadialGradient" keysAndValues:
+                                        @"inputRadius0", @(radius),
+                                        @"inputRadius1", @(radius + 1.0f),
+                                        @"inputColor0", [CIColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:1.0],
+                                        @"inputColor1", [CIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0],
+                                        kCIInputCenterKey, [CIVector vectorWithX:centerX Y:centerY],
+                                        nil];
+            CIImage *circleImage = [radialGradient valueForKey:kCIOutputImageKey];
+            if (nil == maskImage)
+                maskImage = circleImage;
+            else
+                maskImage = [[CIFilter filterWithName:@"CISourceOverCompositing" keysAndValues:
+                              kCIInputImageKey, circleImage,
+                              kCIInputBackgroundImageKey, maskImage,
+                              nil] valueForKey:kCIOutputImageKey];
+        }
+        //CIPixellate
+        CIFilter *pixellate = [CIFilter filterWithName:@"CIPixellate" keysAndValues:
+                                    @"inputImage", ciImage,
+                                    @"inputScale", @(MAX(self.orignalImage.size.width, self.orignalImage.size.height)/60.0),
+                                    nil];
+        CIImage *pixellateImage = [pixellate valueForKey:kCIOutputImageKey];
+
+
+        CIFilter *blendWithMask = [CIFilter filterWithName:@"CIBlendWithMask"
+                                               keysAndValues:
+                                                    @"inputImage", pixellateImage,
+                                     @"inputBackgroundImage", ciImage,
+                                     @"inputMaskImage", maskImage,
+                                     nil];
+
+        CGImageRef cgImage = [context createCGImage:blendWithMask.outputImage fromRect:CGRectMake(0, 0, self.orignalImage.size.width, self.orignalImage.size.height)];
         retImg = [UIImage imageWithCGImage:cgImage];
     }
 
